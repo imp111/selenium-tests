@@ -1,6 +1,6 @@
 # Website used for testing: https://todomvc.com/
 
-## Testing framework used: XUnit
+## Testing framework used: XUnit and Selenium
 
 ## Installed NuGet Packages:
   - Selenium.WebDriver
