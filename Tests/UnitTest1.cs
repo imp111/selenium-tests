@@ -7,7 +7,7 @@ namespace Tests
     public class UnitTest1
     {
         IWebDriver driver = new ChromeDriver();
-        string url = "https://www.selenium.dev/selenium/web/web-form.html";
+        string url = "https://todomvc.com/";
 
         [Fact]
         public void NavigateToWebsite()
@@ -41,7 +41,5 @@ namespace Tests
 
             driver.Quit();
         }
-
-
     }
 }
