@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using FluentAssertions;
+using OpenQA.Selenium;
 using Xunit.Abstractions;
 
 namespace Tests
@@ -18,13 +19,17 @@ namespace Tests
         public void NavigateToUrl()
         {
             webDriverFixture.ChromeDriver.Navigate().GoToUrl(webDriverFixture.URL);
+
+            var anchor = webDriverFixture.ChromeDriver.FindElements(By.TagName("a"));
+
+            anchor.Should().HaveCountGreaterThan(2);
             testOutputHelper.WriteLine("Navigating to URL sucessfull");
         }
 
         [Theory]
         [InlineData("Do the dishes")]
         [InlineData("!@#$-()*")]
-        [InlineData("")]
+        [InlineData(null)]
         [InlineData(" ")]
         public void TryAddingToDoFirstWay(string input)
         {
@@ -68,12 +73,11 @@ namespace Tests
             },
             new object[]
             {
-                ""
+                null
             },
             new object[]
             {
                 "!@#$-()*"
-
             }
         };
     }
