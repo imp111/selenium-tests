@@ -1,4 +1,5 @@
 ﻿using AutoFixture;
+using AutoFixture.Xunit2;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,36 @@ namespace Tests
                             .With(x => x.Name == "Gosho") // name will have value Gosho
                             .Create(); // using AutoFixture to create string
            
+            driver
+                .Navigate()
+                .GoToUrl(webDriverFixture.URL);
+
+            driver.FindElement(By.XPath("/html/body/ng-view/section/header/form/input")).SendKeys(model.Name);
+            driver.FindElement(By.XPath("/html/body/ng-view/section/header/form/input")).SendKeys(Keys.Enter);
+
+            testOutputHelper.WriteLine("Successfuly added to do!");
+        }
+
+        [Theory, AutoData]
+        public void TryAddingNoteWithAutoData(RegisterUserModel model)
+        {
+            var driver = webDriverFixture.ChromeDriver;
+            
+            driver
+                .Navigate()
+                .GoToUrl(webDriverFixture.URL);
+
+            driver.FindElement(By.XPath("/html/body/ng-view/section/header/form/input")).SendKeys(model.Name);
+            driver.FindElement(By.XPath("/html/body/ng-view/section/header/form/input")).SendKeys(Keys.Enter);
+
+            testOutputHelper.WriteLine("Successfuly added to do!");
+        }
+
+        [Theory, RegisterUser]
+        public void TryAddingNoteWithRegisterUserAttribute(RegisterUserModel model)
+        {
+            var driver = webDriverFixture.ChromeDriver;
+
             driver
                 .Navigate()
                 .GoToUrl(webDriverFixture.URL);

@@ -36,6 +36,23 @@
           }
         }
       },
+      "AutoFixture.Xunit2/4.18.0": {
+        "type": "package",
+        "dependencies": {
+          "AutoFixture": "4.18.0",
+          "xunit.extensibility.core": "[2.2.0, 3.0.0)"
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoFixture.Xunit2.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoFixture.Xunit2.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "coverlet.collector/3.1.2": {
         "type": "package",
         "build": {
@@ -2045,6 +2062,27 @@
         "lib/netstandard2.0/AutoFixture.dll",
         "lib/netstandard2.0/AutoFixture.pdb",
         "lib/netstandard2.0/AutoFixture.xml"
+      ]
+    },
+    "AutoFixture.Xunit2/4.18.0": {
+      "sha512": "m44VA9qYpqqO6zvSflMOxNNTukMuz+pcY4DrAldFh6f3LpRNTK1dquWI+96jlS9fa4Mli+RnXApveWGnl5w9zw==",
+      "type": "package",
+      "path": "autofixture.xunit2/4.18.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "autofixture.xunit2.4.18.0.nupkg.sha512",
+        "autofixture.xunit2.nuspec",
+        "icon.png",
+        "lib/net452/AutoFixture.Xunit2.dll",
+        "lib/net452/AutoFixture.Xunit2.pdb",
+        "lib/net452/AutoFixture.Xunit2.xml",
+        "lib/netstandard1.5/AutoFixture.Xunit2.dll",
+        "lib/netstandard1.5/AutoFixture.Xunit2.pdb",
+        "lib/netstandard1.5/AutoFixture.Xunit2.xml",
+        "lib/netstandard2.0/AutoFixture.Xunit2.dll",
+        "lib/netstandard2.0/AutoFixture.Xunit2.pdb",
+        "lib/netstandard2.0/AutoFixture.Xunit2.xml"
       ]
     },
     "coverlet.collector/3.1.2": {
@@ -6395,6 +6433,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "AutoFixture >= 4.18.0",
+      "AutoFixture.Xunit2 >= 4.18.0",
       "FluentAssertions >= 6.10.0",
       "Microsoft.NET.Test.Sdk >= 17.5.0",
       "Selenium.Support >= 4.8.2",
@@ -6446,6 +6485,10 @@
         "targetAlias": "net6.0",
         "dependencies": {
           "AutoFixture": {
+            "target": "Package",
+            "version": "[4.18.0, )"
+          },
+          "AutoFixture.Xunit2": {
             "target": "Package",
             "version": "[4.18.0, )"
           },

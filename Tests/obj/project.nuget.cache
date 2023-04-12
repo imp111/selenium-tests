@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "bP3655I21ozuBROjuY2mZNjPn1GBfN324NU39l6Otw+3vHaqmrjbSJwHb3fhi08Kl30789F38Ehl7IcEPX3V6g==",
+  "dgSpecHash": "FoLZS4XH1iZTlJ2j9rNkFO16F9CPZyrzbVzVrigmH1LV3A49bW1uYrRfGLydgnMI7xf0BpHq44GtmAgRqWs1IA==",
   "success": true,
   "projectFilePath": "D:\\Projects\\selenium-tests\\Tests\\Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alexs\\.nuget\\packages\\anglesharp\\0.17.1\\anglesharp.0.17.1.nupkg.sha512",
     "C:\\Users\\alexs\\.nuget\\packages\\autofixture\\4.18.0\\autofixture.4.18.0.nupkg.sha512",
+    "C:\\Users\\alexs\\.nuget\\packages\\autofixture.xunit2\\4.18.0\\autofixture.xunit2.4.18.0.nupkg.sha512",
     "C:\\Users\\alexs\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\alexs\\.nuget\\packages\\fare\\2.1.1\\fare.2.1.1.nupkg.sha512",
     "C:\\Users\\alexs\\.nuget\\packages\\fluentassertions\\6.10.0\\fluentassertions.6.10.0.nupkg.sha512",
