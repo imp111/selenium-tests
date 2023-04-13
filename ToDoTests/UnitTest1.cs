@@ -8,7 +8,7 @@ namespace ToDoTests
 {
     public class UnitTest1 : IDisposable
     {   
-        private const int WAIT_TIME = 30;
+        private const int WAIT_TIME = 5;
         private const string URL = "https://todomvc.com/";
         private readonly IWebDriver _driver;
         private readonly WebDriverWait _wait;
@@ -46,12 +46,31 @@ namespace ToDoTests
             _action.Click(todoInputField).SendKeys(Keys.Enter).Perform();
         }
 
+        private void ItemCheckBox(string checkBoxName)
+        {
+            var todoCheckBox = WaitUntilElementIsFound(By.XPath($"//label[text()=\"{checkBoxName}\"]/preceding-sibling::input"));
+            todoCheckBox.Click();
+        }
+
+        private void AssertNumberOfItems(int count)
+        {
+            var footer = WaitUntilElementIsFound(By.XPath("//footer/span"));
+            ValidateFooterCount(footer, count.ToString());
+        }
+
+        private void ValidateFooterCount(IWebElement resultSpan, string expectedText) // used to compare the parameter count to the number in the span
+        {
+            _wait.Until(ExpectedConditions.TextToBePresentInElement(resultSpan, expectedText));
+        }
+
         [Fact]
         public void VerifyTodoIsCreated()
         {
             _driver.Navigate().GoToUrl(URL);
             OpenTechnology("React");
             AddNewTodoItem("Breakfast");
+            ItemCheckBox("Breakfast");
+            AssertNumberOfItems(0);
         }
     }
 }
