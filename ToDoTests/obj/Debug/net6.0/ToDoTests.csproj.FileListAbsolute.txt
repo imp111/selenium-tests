@@ -105,3 +105,4 @@ D:\Projects\selenium-tests\ToDoTests\obj\Debug\net6.0\refint\ToDoTests.dll
 D:\Projects\selenium-tests\ToDoTests\obj\Debug\net6.0\ToDoTests.pdb
 D:\Projects\selenium-tests\ToDoTests\obj\Debug\net6.0\ToDoTests.genruntimeconfig.cache
 D:\Projects\selenium-tests\ToDoTests\obj\Debug\net6.0\ref\ToDoTests.dll
+D:\Projects\selenium-tests\ToDoTests\bin\Debug\net6.0\xunit.runner.json
