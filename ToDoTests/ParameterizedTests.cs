@@ -6,7 +6,7 @@ using SeleniumExtras.WaitHelpers;
 
 namespace ToDoTests
 {
-    public class UnitTest1 : IDisposable
+    public class ParameterizedTests : IDisposable
     {   
         private const int WAIT_TIME = 5;
         private const string URL = "https://todomvc.com/";
@@ -14,7 +14,7 @@ namespace ToDoTests
         private readonly WebDriverWait _wait;
         private readonly Actions _action;
 
-        public UnitTest1()
+        public ParameterizedTests()
         {
             _driver = new ChromeDriver();
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(WAIT_TIME));
@@ -64,10 +64,38 @@ namespace ToDoTests
         }
 
         [Fact]
-        public void VerifyTodoIsCreated()
+        public void VerifyTodoIsCreated() // testing a single technology
         {
             _driver.Navigate().GoToUrl(URL);
             OpenTechnology("React");
+            AddNewTodoItem("Breakfast");
+            ItemCheckBox("Breakfast");
+            AssertNumberOfItems(0);
+        }
+
+        [Theory]
+        [InlineData("Backbone.js")]
+        [InlineData("AngularJS")]
+        [InlineData("Ember.js")]
+        [InlineData("KnockoutJS")]
+        [InlineData("Dojo")]
+        [InlineData("Knockback.js")]
+        [InlineData("CanJS")]
+        [InlineData("Polymer")]
+        [InlineData("Mithril")]
+        [InlineData("Vue.js")]
+        [InlineData("Marionette.js")]
+        [InlineData("Kotlin + React")]
+        [InlineData("Spine")]
+        [InlineData("Dart")]
+        [InlineData("GWT")]
+        [InlineData("Closure")]
+        [InlineData("Elm")]
+        [InlineData("AngularDart")]
+        public void VerifyTodoIsCreatedMultiple(string technology) // parameterized testing
+        {
+            _driver.Navigate().GoToUrl(URL);
+            OpenTechnology(technology);
             AddNewTodoItem("Breakfast");
             ItemCheckBox("Breakfast");
             AssertNumberOfItems(0);
