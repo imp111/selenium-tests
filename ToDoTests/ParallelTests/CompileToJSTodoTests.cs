@@ -1,35 +1,22 @@
-﻿using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using SeleniumExtras.WaitHelpers;
+using ToDoTests.Fixture_version1;
 
 namespace ToDoTests.ParallelTests
 {
-    public class CompileToJSTodoTests : IDisposable
+    public class CompileToJSTodoTests : IClassFixture<DriverFixture>
     {
-        private const int WAIT_TIME = 5;
         private const string URL = "https://todomvc.com/";
-        private readonly IWebDriver _driver;
-        private readonly WebDriverWait _wait;
-        private readonly Actions _action;
+        private readonly DriverFixture _fixture;
 
-        public CompileToJSTodoTests()
+        public CompileToJSTodoTests(DriverFixture fixture)
         {
-            _driver = new ChromeDriver();
-            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(WAIT_TIME));
-            _action = new Actions(_driver);
-        }
-
-        public void Dispose()
-        {
-            _driver.Quit();
-            _driver.Dispose();
+            _fixture = fixture;
         }
 
         private IWebElement WaitUntilElementIsFound(By locator)
         {
-            return _wait.Until(ExpectedConditions.ElementExists(locator));
+            return _fixture.Wait.Until(ExpectedConditions.ElementExists(locator));
         }
 
         private void OpenTechnology(string name)
@@ -43,7 +30,8 @@ namespace ToDoTests.ParallelTests
             var todoInputField = WaitUntilElementIsFound(By.XPath("//input[@placeholder=\"What needs to be done?\"]"));
             todoInputField.SendKeys(input);
 
-            _action.Click(todoInputField).SendKeys(Keys.Enter).Perform();
+            _fixture.Action.Click(todoInputField).SendKeys(Keys.Enter).Perform();
+            
         }
 
         private void ItemCheckBox(string checkBoxName)
@@ -60,7 +48,7 @@ namespace ToDoTests.ParallelTests
 
         private void ValidateFooterCount(IWebElement resultSpan, string expectedText) // used to compare the parameter count to the number in the span
         {
-            _wait.Until(ExpectedConditions.TextToBePresentInElement(resultSpan, expectedText));
+            _fixture.Wait.Until(ExpectedConditions.TextToBePresentInElement(resultSpan, expectedText));
         }
 
         [Theory]
@@ -76,7 +64,7 @@ namespace ToDoTests.ParallelTests
         [InlineData("Vanilla ES6")]
         public void VerifyTodoIsCreatedMultiple(string technology) // parameterized testing
         {
-            _driver.Navigate().GoToUrl(URL);
+            _fixture.Driver.Navigate().GoToUrl(URL);
             OpenTechnology(technology);
             AddNewTodoItem("Breakfast");
             ItemCheckBox("Breakfast");
