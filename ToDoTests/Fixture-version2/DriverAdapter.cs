@@ -17,7 +17,6 @@ namespace ToDoTests.Fixture_version2
     public class DriverAdapter : IDisposable
     {
         private WebDriverWait? _wait;
-        private Actions? _action;
         private IWebDriver? _driver;
         private ITestOutputHelper? _testOutputHelper;
         public const int WAIT_TIME = 5;
@@ -48,7 +47,6 @@ namespace ToDoTests.Fixture_version2
             }
 
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(WAIT_TIME));
-            _action = new Actions(_driver);
             _testOutputHelper = new TestOutputHelper();
 
             _driver?.Manage().Window.Maximize(); // make browser to fullscreen
@@ -56,21 +54,24 @@ namespace ToDoTests.Fixture_version2
 
         public void GoToUrl(string url)
         {
-            _driver.Navigate().GoToUrl(url);
+            _driver?.Navigate().GoToUrl(url);
+            _testOutputHelper?.WriteLine("Successfuly navigated to URL");
         }
 
         public IWebElement FindElement(By locator)
         {
+            _testOutputHelper?.WriteLine("Element found");
             return _wait.Until(ExpectedConditions.ElementExists(locator));
         }
 
         public void ValidateTextInElement(IWebElement element, string expectedValue)
         {
-            _wait.Until(ExpectedConditions.TextToBePresentInElement(element, expectedValue));
+            _wait?.Until(ExpectedConditions.TextToBePresentInElement(element, expectedValue));
         }
 
         public void Dispose()
         {
+            _testOutputHelper?.WriteLine("Quit and Dispose");
             _driver?.Quit();
             _driver?.Dispose();
         }

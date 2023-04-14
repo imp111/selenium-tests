@@ -1,54 +1,43 @@
 ﻿using OpenQA.Selenium;
-using SeleniumExtras.WaitHelpers;
-using ToDoTests.Fixture_version1;
 
-namespace ToDoTests.ParallelTests
+namespace ToDoTests.Fixture_version2.Tests.Firefox
 {
-    public class CompileToJSTodoTests : IClassFixture<DriverFixture>
+    public class CompileToJSTodoTests : IClassFixture<FirefoxDriverFixture>
     {
         private const string URL = "https://todomvc.com/";
-        private readonly DriverFixture _fixture;
+        private readonly FirefoxDriverFixture _fixture;
 
-        public CompileToJSTodoTests(DriverFixture fixture)
+        public CompileToJSTodoTests(FirefoxDriverFixture fixture)
         {
             _fixture = fixture;
         }
 
-        private IWebElement WaitUntilElementIsFound(By locator)
-        {
-            return _fixture.Wait.Until(ExpectedConditions.ElementExists(locator));
-        }
-
         private void OpenTechnology(string name)
         {
-            var technologyLink = WaitUntilElementIsFound(By.LinkText(name));
+            var technologyLink = _fixture.Driver.FindElement(By.LinkText(name));
             technologyLink.Click();
         }
 
         private void AddNewTodoItem(string input)
         {
-            var todoInputField = WaitUntilElementIsFound(By.XPath("//input[@placeholder=\"What needs to be done?\"]"));
+            string xPath = "//input[@placeholder=\"What needs to be done?\"]";
+            var todoInputField = _fixture.Driver.FindElement(By.XPath(xPath));
             todoInputField.SendKeys(input);
-
-            _fixture.Action.Click(todoInputField).SendKeys(Keys.Enter).Perform();
-            
+            todoInputField.SendKeys(Keys.Enter);
         }
 
         private void ItemCheckBox(string checkBoxName)
         {
-            var todoCheckBox = WaitUntilElementIsFound(By.XPath($"//label[text()=\"{checkBoxName}\"]/preceding-sibling::input"));
+            string xPath = $"//label[text()=\"{checkBoxName}\"]/preceding-sibling::input";
+            var todoCheckBox = _fixture.Driver.FindElement(By.XPath(xPath));
             todoCheckBox.Click();
         }
 
         private void AssertNumberOfItems(int count)
         {
-            var footer = WaitUntilElementIsFound(By.XPath("//footer/span"));
-            ValidateFooterCount(footer, count.ToString());
-        }
-
-        private void ValidateFooterCount(IWebElement resultSpan, string expectedText) // used to compare the parameter count to the number in the span
-        {
-            _fixture.Wait.Until(ExpectedConditions.TextToBePresentInElement(resultSpan, expectedText));
+            string xPath = "//footer/span";
+            var footer = _fixture.Driver.FindElement(By.XPath(xPath));
+            _fixture.Driver.ValidateTextInElement(footer, count.ToString());
         }
 
         [Theory]
@@ -64,7 +53,7 @@ namespace ToDoTests.ParallelTests
         [InlineData("Vanilla ES6")]
         public void VerifyTodoIsCreatedMultiple(string technology) // parameterized testing
         {
-            _fixture.Driver.Navigate().GoToUrl(URL);
+            _fixture.Driver.GoToUrl(URL);
             OpenTechnology(technology);
             AddNewTodoItem("Breakfast");
             ItemCheckBox("Breakfast");

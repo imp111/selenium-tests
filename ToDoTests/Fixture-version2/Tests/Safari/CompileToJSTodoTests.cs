@@ -1,13 +1,13 @@
 ﻿using OpenQA.Selenium;
 
-namespace ToDoTests.Fixture_version2.Tests.Edge
+namespace ToDoTests.Fixture_version2.Tests.Safari
 {
-    public class CompileToJSTodoTests : IClassFixture<EdgeDriverFixture>
+    public class CompileToJSTodoTests : IClassFixture<SafariDriverFixture>
     {
         private const string URL = "https://todomvc.com/";
-        private readonly EdgeDriverFixture _fixture;
+        private readonly SafariDriverFixture _fixture;
 
-        public CompileToJSTodoTests(EdgeDriverFixture fixture)
+        public CompileToJSTodoTests(SafariDriverFixture fixture)
         {
             _fixture = fixture;
         }

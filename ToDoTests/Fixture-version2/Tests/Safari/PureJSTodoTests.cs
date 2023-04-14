@@ -1,14 +1,14 @@
 ﻿using OpenQA.Selenium;
 
 //[assembly: CollectionBehavior(CollectionBehavior.CollectionPerClass, MaxParallelThreads = 2)]
-namespace ToDoTests.Fixture_version2
+namespace ToDoTests.Fixture_version2.Tests.Safari
 {
-    public class PureJSTodoTests : IClassFixture<EdgeDriverFixture>
+    public class PureJSTodoTests : IClassFixture<SafariDriverFixture>
     {
         private const string URL = "https://todomvc.com/";
-        private readonly EdgeDriverFixture _fixture;
+        private readonly SafariDriverFixture _fixture;
 
-        public PureJSTodoTests(EdgeDriverFixture fixture)
+        public PureJSTodoTests(SafariDriverFixture fixture)
         {
             _fixture = fixture;
         }

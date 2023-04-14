@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ToDoTests.Fixture_version2
 {
-    internal class EdgeDriverFixture : DriverFixture
+    public class EdgeDriverFixture : DriverFixture
     {
         protected override void InitializeDriver()
         {

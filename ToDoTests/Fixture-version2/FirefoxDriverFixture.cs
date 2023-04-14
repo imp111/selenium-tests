@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ToDoTests.Fixture_version2
 {
-    internal class FirefoxDriverFixture : DriverFixture
+    public class FirefoxDriverFixture : DriverFixture
     {
         protected override void InitializeDriver()
         {
